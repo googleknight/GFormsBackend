@@ -38,3 +38,17 @@ describe('route /forms/new', () => {
         .catch(console.log));
   });
 });
+
+describe('route /forms', () => {
+  describe('method GET /fomrs', () => {
+    test('should return a 200 OK statusCode', done =>
+      supertest(server.listener)
+        .get('/forms')
+        .then((response) => {
+          expect(response.statusCode).toBe(200);
+          done();
+        })
+        .catch(console.log));
+  });
+});
+
