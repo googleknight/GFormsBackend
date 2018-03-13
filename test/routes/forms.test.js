@@ -40,7 +40,7 @@ describe('route /forms/new', () => {
 });
 
 describe('route /forms', () => {
-  describe('method GET /fomrs', () => {
+  describe('method GET /forms', () => {
     test('should return a 200 OK statusCode', done =>
       supertest(server.listener)
         .get('/forms')
@@ -53,7 +53,7 @@ describe('route /forms', () => {
       supertest(server.listener)
         .get('/forms')
         .then((response) => {
-          expect(response.body.data[0].formName).toBe('TestForm');
+          expect(response.body.data[0].DISTINCT).toBe('TestForm');
           done();
         })
         .catch(console.log));

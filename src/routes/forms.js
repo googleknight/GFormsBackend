@@ -1,5 +1,6 @@
 const { createForm } = require('../handlers/createForm');
 const { saveForm } = require('../handlers/saveForm');
+
 const Models = require('../../models');
 
 module.exports = [
@@ -28,10 +29,10 @@ module.exports = [
     method: 'GET',
     path: '/forms',
     handler: (request, response) => {
-      Models.formdetail.findAll({
-        attributes: ['formName'],
-        distinct: true,
-      }).then((forms) => {
+      Models.formdetail.aggregate(
+        'formName',
+        'DISTINCT', { plain: false },
+      ).then((forms) => {
         response({
           data: forms,
           statusCode: 200,
@@ -68,4 +69,5 @@ module.exports = [
         });
     },
   },
+
 ];
