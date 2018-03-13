@@ -22,8 +22,7 @@ describe('function createForm', () => {
   },
   ];
   test('should return a promise', (done) => {
-    createForm('TestForm', inputQuestions).then(data =>
-      expect(data).toBeInstanceOf(Promise));
+    expect(createForm('TestForm', inputQuestions)).toBeInstanceOf(Promise);
     done();
   });
   test('should add two questions in database', (done) => {

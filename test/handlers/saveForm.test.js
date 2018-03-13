@@ -39,9 +39,13 @@ describe('function saveForm', () => {
     response: 'Some other answer',
   },
   ];
-  test('should return a promise', (done) => {
+  test('should return an Array', (done) => {
+    expect(saveForm('TestUser', inputResponses)).toBeInstanceOf(Promise);
+    done();
+  });
+  test('should makes two entries in database', (done) => {
     saveForm('TestUser', inputResponses).then(data =>
-      expect(data).toBeInstanceOf(Array));
+      expect(data.length).toBe(2));
     done();
   });
 });
