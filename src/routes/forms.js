@@ -1,4 +1,5 @@
 const { createForm } = require('../handlers/createForm');
+const { saveForm } = require('../handlers/saveForm');
 const Models = require('../../models');
 
 module.exports = [
@@ -40,6 +41,27 @@ module.exports = [
           response({
             data: {
               reason: 'Unable to get forms.',
+            },
+            statusCode: 500,
+          });
+        });
+    },
+  },
+  {
+    method: 'POST',
+    path: '/forms/submit',
+    handler: (request, response) => {
+      const { payload } = request;
+      saveForm(payload.formName, payload.responses).then((formDetails) => {
+        response({
+          data: formDetails,
+          statusCode: 200,
+        });
+      })
+        .catch(() => {
+          response({
+            data: {
+              reason: 'Unable to submit form.',
             },
             statusCode: 500,
           });

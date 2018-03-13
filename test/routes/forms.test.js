@@ -11,7 +11,7 @@ afterAll((done) => {
 });
 
 describe('route /forms/new', () => {
-  describe('method POST /fomrs/new', () => {
+  describe('method POST /forms/new', () => {
     test('should return a 200 OK statusCode', done =>
       supertest(server.listener)
         .post('/forms/new')
@@ -60,3 +60,29 @@ describe('route /forms', () => {
   });
 });
 
+describe('route /forms/submit', () => {
+  describe('method POST /forms/submit', () => {
+    test('should return a 200 OK statusCode', done =>
+      supertest(server.listener)
+        .post('/forms/submit')
+        .send({
+          formName: 'TestForm',
+          responses:
+            [{
+              question: 'First Question',
+              response: 'Some answer',
+            },
+            {
+              question: 'Second Question',
+              response: 'Some other answer',
+            },
+            ]
+          ,
+        })
+        .then((response) => {
+          expect(response.statusCode).toBe(200);
+          done();
+        })
+        .catch(console.log));
+  });
+});
