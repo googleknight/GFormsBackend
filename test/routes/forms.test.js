@@ -49,6 +49,14 @@ describe('route /forms', () => {
           done();
         })
         .catch(console.log));
+    test('should return "TestForm" ', done =>
+      supertest(server.listener)
+        .get('/forms')
+        .then((response) => {
+          expect(response.body.data[0].formName).toBe('TestForm');
+          done();
+        })
+        .catch(console.log));
   });
 });
 
