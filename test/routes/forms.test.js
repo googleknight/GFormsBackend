@@ -40,10 +40,10 @@ describe('route /forms/new', () => {
 });
 
 describe('route /forms', () => {
-  describe('method GET /forms', () => {
+  describe('method GET /forms/formNames', () => {
     test('should return a 200 OK statusCode', done =>
       supertest(server.listener)
-        .get('/forms')
+        .get('/forms/formNames')
         .then((response) => {
           expect(response.statusCode).toBe(200);
           done();
@@ -51,7 +51,7 @@ describe('route /forms', () => {
         .catch(console.log));
     test('should return "TestForm" ', done =>
       supertest(server.listener)
-        .get('/forms')
+        .get('/forms/formNames')
         .then((response) => {
           expect(response.body.data[0].DISTINCT).toBe('TestForm');
           done();
@@ -79,6 +79,17 @@ describe('route /forms/submit', () => {
             ]
           ,
         })
+        .then((response) => {
+          expect(response.statusCode).toBe(200);
+          done();
+        })
+        .catch(console.log));
+  });
+
+  describe('method GET /forms', () => {
+    test('should return a 200 OK statusCode', done =>
+      supertest(server.listener)
+        .get('/forms?formName=TestForm')
         .then((response) => {
           expect(response.statusCode).toBe(200);
           done();

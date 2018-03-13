@@ -27,12 +27,40 @@ module.exports = [
   },
   {
     method: 'GET',
-    path: '/forms',
+    path: '/forms/formNames',
     handler: (request, response) => {
       Models.formdetail.aggregate(
         'formName',
         'DISTINCT', { plain: false },
       ).then((forms) => {
+        response({
+          data: forms,
+          statusCode: 200,
+        });
+      })
+        .catch(() => {
+          response({
+            data: {
+              reason: 'Unable to get forms.',
+            },
+            statusCode: 500,
+          });
+        });
+    },
+  },
+  {
+    method: 'GET',
+    path: '/forms',
+    handler: (request, response) => {
+      Models.formdetail.findAll({
+        where: {
+          formName: request.query.formName,
+        },
+        attributes: [
+          'question',
+          'required',
+          'type'],
+      }).then((forms) => {
         response({
           data: forms,
           statusCode: 200,
