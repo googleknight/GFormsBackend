@@ -1,7 +1,7 @@
 const { createForm } = require('../../src/handlers/createForm');
 const Models = require('../../models');
 
-afterAll((done) => {
+afterEach((done) => {
   Models.formdetail.destroy({
     where: { },
     truncate: false,
@@ -24,6 +24,12 @@ describe('function createForm', () => {
   test('should return a promise', (done) => {
     createForm('TestForm', inputQuestions).then(data =>
       expect(data).toBeInstanceOf(Promise));
+    done();
+  });
+  test('should add two questions in database', (done) => {
+    createForm('TestForm', inputQuestions).then(() =>
+      Models.formdetail.count(count =>
+        expect(count).toBe(2)));
     done();
   });
 });
