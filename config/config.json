@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "database_admin",
+    "password": "password",
+    "database": "gformsdb_dev",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "database_admin",
+    "password": "password",
+    "database": "gformsdb_test",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "production": {
+    "username": "database_admin",
+    "password": "password",
+    "database": "gformsdb_test",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  }
+}
